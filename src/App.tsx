@@ -1,27 +1,19 @@
+/* eslint-disable max-len */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import './App.scss';
-
-interface Props {
-  onClick: () => void;
-}
-
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
+import { TodoApp } from './components/TodoApp';
+import { ContextProvider } from './TodosContext';
+import { UserWarning } from './UserWarning';
+import { USER_ID } from './constans';
 
 export const App: React.FC = () => {
+  if (!USER_ID) {
+    return <UserWarning />;
+  }
+
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
-    </div>
+    <ContextProvider>
+      <TodoApp userID={USER_ID} />
+    </ContextProvider>
   );
 };

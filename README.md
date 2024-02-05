@@ -1,9 +1,18 @@
-# React TypeScript Starter Pack
+# Project Name: React TypeScript To-Do List
 
-To use this template click `Use this template`
+## Description
+A simple web application for managing tasks (To-Do List) built with React and TypeScript. Demonstrates React and TypeScript skills, providing a user-friendly task management tool.
 
-### Available Scripts
+## Features
+- Add and delete tasks.
+- Task completion status marking.
+- Task filtering (completed/uncompleted).
+- Friendly user interface with React components.
+- Type safety with TypeScript.
 
-`Deploy` - available to deploy your application to gh-pages
+## Technologies
+- React
+- TypeScript
+- CSS/SCSS
 
-`SCSS Preprocessor` - available to write your styles with modern style language
+**[DEMO LINK](https://daryna-hnidash.github.io/Todo_App)**
