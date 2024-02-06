@@ -1,4 +1,4 @@
-#React TypeScript To-Do List
+# React TypeScript To-Do List
 
 ## Description
 A simple web application for managing tasks (To-Do List) built with React and TypeScript. Demonstrates React and TypeScript skills, providing a user-friendly task management tool.
