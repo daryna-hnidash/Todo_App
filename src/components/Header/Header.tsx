@@ -9,7 +9,7 @@ import { Todo } from '../../types/Todo';
 
 export const Header: React.FC = () => {
   const {
-    todos, setTodos, errorNotificationHandler, USER_ID, setTempTodo,
+    todos, setTodos, errorNotificationHandler, userId, setTempTodo,
     setTodosIdsUpdating, setErrorMessage, statusChangeHandler,
   } = useContext(TodosContext);
   const [title, setTitle] = useState('');
@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
     setTempTodo(tempTodoData);
     setTodosIdsUpdating([tempTodoData.id]);
 
-    addTodo(USER_ID, newTodo)
+    addTodo(userId || 0, newTodo)
       .then((response) => {
         setTodos([...todos,
           {
@@ -67,13 +67,15 @@ export const Header: React.FC = () => {
       return;
     }
 
-    const newTodo: Omit<Todo, 'id'> = {
-      userId: USER_ID,
-      title: trimmedTitle,
-      completed: false,
-    };
+    if (userId) {
+      const newTodo: Omit<Todo, 'id'> = {
+        userId,
+        title: trimmedTitle,
+        completed: false,
+      };
 
-    addingTodo(newTodo);
+      addingTodo(newTodo);
+    }
   };
 
   const toggleAllHandler = async (

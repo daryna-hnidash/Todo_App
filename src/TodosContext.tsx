@@ -4,14 +4,14 @@ import React, {
 import { deleteTodo, updateTodo } from './api/todos';
 import { ErrorMessage } from './types/errorMessage';
 import { Todo } from './types/Todo';
-import { USER_ID } from './constans';
 
 type Props = {
   children: ReactNode,
 };
 
 const deafultValue = {
-  USER_ID: 11443,
+  userId: null,
+  setUserId: () => { },
   todos: [],
   setTodos: () => { },
   errorMessage: ErrorMessage.NO,
@@ -28,7 +28,8 @@ const deafultValue = {
 };
 
 interface ITodosContext {
-  USER_ID: number,
+  userId: number | null,
+  setUserId: (n: number | null) => void,
   todos: Todo[],
   setTodos: (t: Todo[]) => void,
   errorMessage: ErrorMessage,
@@ -47,6 +48,7 @@ interface ITodosContext {
 export const TodosContext = createContext<ITodosContext>(deafultValue);
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
+  const [userId, setUserId] = useState<number | null>(null);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [errorMessage, setErrorMessage] = useState(ErrorMessage.NO);
   const [isLoading, setIsLoading] = useState(false);
@@ -107,7 +109,8 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
   };
 
   const value = useMemo(() => ({
-    USER_ID,
+    userId,
+    setUserId,
     todos,
     setTodos,
     errorMessage,
@@ -121,7 +124,7 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
     tempTodo,
     setTempTodo,
     statusChangeHandler,
-  }), [todos, errorMessage, todosIdsUpdating, tempTodo]);
+  }), [todos, errorMessage, todosIdsUpdating, tempTodo, userId]);
 
   return (
     <>
