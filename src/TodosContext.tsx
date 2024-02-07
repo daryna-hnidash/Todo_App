@@ -2,6 +2,7 @@ import React, {
   createContext, ReactNode, useMemo, useState,
 } from 'react';
 import { deleteTodo, updateTodo } from './api/todos';
+import { useLocalStorsge } from './hooks/useLocalStorage';
 import { ErrorMessage } from './types/errorMessage';
 import { Todo } from './types/Todo';
 
@@ -48,7 +49,7 @@ interface ITodosContext {
 export const TodosContext = createContext<ITodosContext>(deafultValue);
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
-  const [userId, setUserId] = useState<number | null>(null);
+  const [userId, setUserId] = useLocalStorsge<number | null>('userId', null);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [errorMessage, setErrorMessage] = useState(ErrorMessage.NO);
   const [isLoading, setIsLoading] = useState(false);
