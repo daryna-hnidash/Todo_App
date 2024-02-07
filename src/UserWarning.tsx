@@ -1,22 +1,48 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { TodosContext } from './TodosContext';
 
-export const UserWarning: React.FC = () => (
-  <section className="section">
-    <p className="box is-size-3">
-      Please get your
-      {' '}
-      <b> userId </b>
-      {' '}
-      <a href="https://mate-academy.github.io/react_student-registration">
-        here
-      </a>
-      {' '}
-      and save it in the app
-      {' '}
-      <pre>const USER_ID = ...</pre>
+export const UserWarning: React.FC = () => {
+  const { setUserId } = useContext(TodosContext);
+  const [inputValue, setInputValue] = useState('');
 
-      All requests to the API must be sent with this
-      <b> userId.</b>
-    </p>
-  </section>
-);
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setUserId(+inputValue);
+  };
+
+  return (
+    <section className="section">
+      <p className="box is-size-3">
+        Please get your
+        {' '}
+        <b> userID </b>
+        {' '}
+        <a href="https://mate-academy.github.io/react_student-registration">
+          here
+        </a>
+        <b> userID.</b>
+      </p>
+
+      <form
+        method="get"
+        onSubmit={onSubmitHandler}
+      >
+        <div className="field is-grouped">
+          <p className="control is-expanded">
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter your userID here"
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </p>
+          <p className="control">
+            <button type="submit" className="button is-info">
+              Submit
+            </button>
+          </p>
+        </div>
+      </form>
+    </section>
+  );
+};

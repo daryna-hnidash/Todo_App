@@ -1,19 +1,18 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
+import React, { useContext } from 'react';
 import { TodoApp } from './components/TodoApp';
-import { ContextProvider } from './TodosContext';
+import { TodosContext } from './TodosContext';
 import { UserWarning } from './UserWarning';
-import { USER_ID } from './constans';
 
 export const App: React.FC = () => {
-  if (!USER_ID) {
-    return <UserWarning />;
-  }
+  const { userId } = useContext(TodosContext);
 
   return (
-    <ContextProvider>
-      <TodoApp userID={USER_ID} />
-    </ContextProvider>
+    <>
+      {!userId
+        ? <UserWarning />
+        : <TodoApp userID={userId} />}
+    </>
   );
 };
