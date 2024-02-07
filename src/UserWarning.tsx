@@ -20,7 +20,6 @@ export const UserWarning: React.FC = () => {
         <a href="https://mate-academy.github.io/react_student-registration">
           here
         </a>
-        <b> userID.</b>
       </p>
 
       <form
